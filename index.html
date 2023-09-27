@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 20px;
+        }
+        .btn {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 10px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn2 {
+            background-color: #E5383B;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+        }
+        .btn2:hover {
+            background-color: #A4161A;
+        }
+        #result {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors Game</h1>
+    <p>Choose your move:</p>
+    <button class="btn" id="rock">Rock</button>
+    <button class="btn" id="paper">Paper</button>
+    <button class="btn" id="scissors">Scissor</button>
+
+    <!-- Reset button placed below the other buttons -->
+    <p>
+        <button class="btn2" id="reset">Reset</button>
+    </p>
+
+    <p id="result"></p>
+
+    <script>
+        // Function to generate a random computer choice
+        function computerChoice() {
+            const choices = ['Rock', 'Paper', 'Scissors'];
+            const randomNumber = Math.floor(Math.random() * 3);
+            return choices[randomNumber];
+        }
+
+        // Function to determine the winner
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "It's a tie!";
+            } else if (
+                (userChoice === 'Rock' && computerChoice === 'Scissors') ||
+                (userChoice === 'Paper' && computerChoice === 'Rock') ||
+                (userChoice === 'Scissors' && computerChoice === 'Paper')
+            ) {
+                return `You win! ${userChoice} beats ${computerChoice}.`;
+            } else {
+                return `Computer wins! ${computerChoice} beats ${userChoice}.`;
+            }
+        }
+
+        // Function to handle user choice and display the result
+        function playGame(userChoice) {
+            const computer = computerChoice();
+            const result = determineWinner(userChoice, computer);
+            document.getElementById('result').textContent = result;
+        }
+
+        // Event listeners for the buttons
+        document.getElementById('rock').addEventListener('click', function() {
+            playGame('Rock');
+        });
+
+        document.getElementById('paper').addEventListener('click', function() {
+            playGame('Paper');
+        });
+
+        document.getElementById('scissors').addEventListener('click', function() {
+            playGame('Scissors');
+        });
+
+        // Event listener for the Reset button
+        document.getElementById('reset').addEventListener('click', function() {
+            document.getElementById('result').textContent = '';
+        });
+    </script>
+</body>
+</html>
